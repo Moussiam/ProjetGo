@@ -50,7 +50,7 @@ func save(author, entry string) {
 	fmt.Println("Enregistré dans le fichier file.txt")
 }
 
-func showEntries() []string {
+func entries(w http.ResponseWriter, req *http.Request) {
 	raw, err := os.ReadFile("file.txt")
 
 	if err != nil {
@@ -58,12 +58,6 @@ func showEntries() []string {
 	}
 
 	entries := strings.Split(string(raw), "\n")
-
-	return entries
-}
-
-func entries(w http.ResponseWriter, req *http.Request) {
-	entries := showEntries()
 
 	for _, entry := range entries {
 		entry := strings.Split(entry, ":")
